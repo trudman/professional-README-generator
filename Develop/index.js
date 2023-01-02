@@ -13,7 +13,7 @@ const questions = [
       if (titleInput) {
         return true;
       } else {
-        console.log("Please enter the name of your project.");
+        console.log("Please enter the name of your project:");
         return false;
       }
     },
@@ -21,7 +21,7 @@ const questions = [
   {
     type: "input",
     name: "description",
-    message: "Provide a description of your project.",
+    message: "Provide a description of your project:",
     validate: (descriptionInput) => {
       if (descriptionInput) {
         return true;
@@ -52,7 +52,7 @@ const questions = [
       if (usageInput) {
         return true;
       } else {
-        console.log("Please provide an explnantion of how your project is used.");
+        console.log("Please provide an explanation of how your project is used.");
         return false;
       }
     },
@@ -74,13 +74,13 @@ const questions = [
   {
     type: "input",
     name: "contribution",
-    message: "Explain how other developers should contribute to your project.",
+    message: "Explain how other developers should contribute to your project:",
     validate: (contributionInput) => {
       if (contributionInput) {
         return true;
       } else {
         console.log(
-          "Please provide an explnantion how other developers should contribute to your project."
+          "Please provide an explanation how other developers should contribute to your project."
         );
         return false;
       }
@@ -115,11 +115,17 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+  fs.writeFile(fileName, data, (err) => {
+    err ? console.error(err) : console.log("README created successfully!");
+  });
+}
 
 // TODO: Create a function to initialize app
 function init() {
-  inquirer.prompt(questions);
+  inquirer.prompt(questions).then(function (userInput) {
+    writeToFile("README.md", generateMarkdown(userInput));
+  });
 }
 
 // Function call to initialize app
