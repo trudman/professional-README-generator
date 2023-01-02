@@ -88,6 +88,19 @@ const questions = [
   },
   {
     type: "input",
+    name: "testing",
+    message: "Explain how other developers should perform testing on your project:",
+    validate: (testingInput) => {
+      if (testingInput) {
+        return true;
+      } else {
+        console.log("Please provide an explanation how other developers should test your project.");
+        return false;
+      }
+    },
+  },
+  {
+    type: "input",
     name: "github",
     message: "Enter your Github username:",
     validate: (githubInput) => {
